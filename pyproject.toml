@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "simple-lang"
+version = "0.0.1"
+description = ""
+authors = ["Merser4 <alekseyparputs@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

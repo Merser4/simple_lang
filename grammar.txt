@@ -1,0 +1,46 @@
+block: '{' <stmt>* '}'
+
+assign:
+    | <name> '=' <expr>
+    | 'const' <name> '=' <expr>
+    | <name> ':' <type> '=' <expr>
+
+return: 'return' <expr>
+
+arg: <name> | <name> ':' <type>
+
+init_fn:
+    | 'fn' <name> '(' <arg>* ')' <block>
+    | 'pub' 'fn' <name> '(' <arg>* ')' <block>
+    | 'fn' <name> '(' <arg>* ')' '->' <type> <block>
+
+if:
+    | 'if' <bool_op> <block>
+    | 'if' <bool_op> <block> <else>
+    | 'if' <bool_op> <block> <elif>*
+    | 'if' <bool_op> <block> <elif>* <else>
+
+elif: 'elif' <bool_op> <block>
+else: 'else' <block>
+
+break: 'break'
+continue: 'continue'
+
+while:
+    | 'while' <bool_op> <block>
+    | 'while' <block>
+
+for:
+    | 'for' <name> 'in' <name> <block>
+    | 'for' <name> 'in' <call> <block>
+
+bool_op: <compare> ['and | 'or] <bool_op> | '(' <bool_op> ')' | <compare>
+
+compare: <expr> ['>' | '>=' | '<' | '<='] <compare> | '(' <compare> ')' | <expr>
+
+expr: <term> ['+' | '-'] <expr> | <term>
+term: <power> ['*' | '/'] <term> | <power>
+power: <factor> '**' <power> | <factor>
+factor: <literal> | <name> | <call> | '(' <expr> ')'
+
+call: <name> '(' <expr>* ')'
