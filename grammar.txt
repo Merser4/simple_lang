@@ -11,7 +11,6 @@ arg: <name> | <name> ':' <type>
 
 init_fn:
     | 'fn' <name> '(' <arg>* ')' <block>
-    | 'pub' 'fn' <name> '(' <arg>* ')' <block>
     | 'fn' <name> '(' <arg>* ')' '->' <type> <block>
 
 if:
@@ -30,13 +29,13 @@ while:
     | 'while' <bool_op> <block>
     | 'while' <block>
 
-for:
-    | 'for' <name> 'in' <name> <block>
-    | 'for' <name> 'in' <call> <block>
+for: 'for' <name> 'in' <call> <block>
 
 bool_op: <compare> ['and | 'or] <bool_op> | '(' <bool_op> ')' | <compare>
 
-compare: <expr> ['>' | '>=' | '<' | '<='] <compare> | '(' <compare> ')' | <expr>
+compare: <unary_op> ['>' | '>=' | '<' | '<='] <compare> | '(' <compare> ')' | <unary_op>
+
+unary_op: 'not' <expr> | <expr>
 
 expr: <term> ['+' | '-'] <expr> | <term>
 term: <power> ['*' | '/'] <term> | <power>
